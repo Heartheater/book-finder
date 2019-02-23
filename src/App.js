@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import './App.css';
+import {API_KEY} from './api-key';
+
+
+
 
 class App extends Component {
+  componentDidMount() {
+    
+    
+  }
+
+  searchBookAPI(searchTerm) {
+    const API_URL = `https://www.googleapis.com/books/v1/volumes`;
+    let foundBooks = {};
+    fetch(`${API_URL}?q=${searchTerm}&key=${API_KEY}`)
+      .then(res => res.json())
+      .then(json => foundBooks = json);
+      return foundBooks;
+  }
+  
+
   render() {
     return (
       <main id="app">
