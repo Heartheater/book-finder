@@ -1,0 +1,87 @@
+#app {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    color: #492323;
+}
+/****************** Header *******************/
+
+#app-header {
+    text-align: center;
+}
+
+/****************** Book Result container *******************/
+
+.results-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #f9f7f7;
+    border-top: #dfdbdb solid 1px;
+    height: 100%;
+    padding: 0 10vw;
+}
+/******************* Books *****************/
+.book {
+    margin: 20px;
+    min-width: 415px;
+    width: 27vw;
+    height: 230px;
+    overflow: hidden;
+    display: grid;
+    border-right: #dfdbdb solid 1px;
+    border-top-left-radius: 7px;
+    grid-template-areas: "cover title" "cover misc" "cover desc" "cover btn";
+}
+.book:hover {
+    background-image: linear-gradient(to right,#dfdbdb, rgb(255, 255, 255));
+}
+.book p {
+    margin: 0;
+}
+
+.book-cover {
+    grid-area: cover;
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.book-title {
+    grid-area: title;
+    margin:0;
+    padding:0;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.misc-book-info {
+    grid-area: misc;
+    color: #63636b;
+    width: 210px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.book-snippet {
+    grid-area: desc;
+}
+.book-info-btn {
+    border-radius: 7px;
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;    
+    grid-area: btn;
+    text-decoration: none;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #57b4c8;
+    width: 100px;
+    min-height: 40px;
+    
+}
+
+.book-info-btn:hover {
+    background-color: #459bba;
+}
