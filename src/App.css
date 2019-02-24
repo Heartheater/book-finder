@@ -1,41 +1,86 @@
 #app {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    max-width: 100vw;
     color: #492323;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
-/****************** Header *******************/
+
+button:hover {
+    cursor: pointer;
+}
 
 #app-header {
+    width: 100%;
     text-align: center;
 }
 
+/****************** Search Bar *******************/
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+}
+.search-bar{
+    border: #459bba solid 1px;
+}
+.search-input {
+    height: 30px;
+    width: 350px;
+    font-size: 18px;
+    border:none;
+    border-right:none;
+}
+.delete-search-btn {
+    height: 33px;
+    font-size: 20px;
+    border: none;
+    background-color: white;
+    width: 40px;   
+    color: #63636b;
+    font-weight: bold;
+}
+.submit-search-btn {
+    height: 34px;
+    font-size: 18px;
+    border: #459bba solid 1px; 
+    background-color: #459bba;
+    color:white;
+    min-width: 40px;   
+}
 /****************** Book Result container *******************/
 
 .results-container {
-    display: flex;
+    margin-top:10px;
+    position: relative;
+    min-height: 80vh;
+    font-size: 18px;
+    width: 80vw;
+    padding: 0 7vw;
+    display: inline-flex;
     justify-content: space-around;
     flex-wrap: wrap;
     background-color: #f9f7f7;
-    border-top: #dfdbdb solid 1px;
-    height: 100%;
-    padding: 0 10vw;
+    border: #dfdbdb solid 1px;
 }
 /******************* Books *****************/
 .book {
     margin: 20px;
-    min-width: 415px;
-    width: 27vw;
-    height: 230px;
+    min-width: 475px;
+    width: 34vw;
+    height: 265px;
     overflow: hidden;
     display: grid;
+    padding-right:15px;
     border-right: #dfdbdb solid 1px;
     border-top-left-radius: 7px;
     grid-template-areas: "cover title" "cover misc" "cover desc" "cover btn";
 }
 .book:hover {
-    background-image: linear-gradient(to right,#dfdbdb, rgb(255, 255, 255));
+    background-image: linear-gradient(to right,#f9f7f7, rgb(255, 255, 255));
 }
 .book p {
     margin: 0;
@@ -43,7 +88,7 @@
 
 .book-cover {
     grid-area: cover;
-    width: 150px;
+    max-width: 130px;
     height: auto;
     margin-right: 20px;
 }
@@ -55,17 +100,28 @@
     font-size: 23px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 .misc-book-info {
     grid-area: misc;
     color: #63636b;
-    width: 210px;
-    font-size: 15px;
+    min-width: 210px;
+    font-size: 14px;
     letter-spacing: 0.5px;
 }
 
+
+
 .book-snippet {
     grid-area: desc;
+    white-space: pre-wrap;
+    overflow: hidden;
+    max-height: 125px;
+    padding:5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 510px;
 }
+
 .book-info-btn {
     border-radius: 7px;
     font-weight: bold;
@@ -78,8 +134,8 @@
     align-items: center;
     background-color: #57b4c8;
     width: 100px;
-    min-height: 40px;
-    
+    height: 40px;
+    margin-top:10px;
 }
 
 .book-info-btn:hover {

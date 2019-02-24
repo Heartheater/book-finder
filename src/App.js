@@ -6,7 +6,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookData: []
+      bookData: [],
+      errorOccured: false
     }
   }
 
@@ -24,6 +25,17 @@ class App extends Component {
     console.log(json);
     return this.setState({bookData: json});
   }
+  handleError = (errorOccured, details) => {
+    if(errorOccured && details){
+      return this.setState({errorOccured: details});
+    } //if an error occured and no details were given, show default message
+    else if(!details && errorOccured){
+      return this.setState({errorOccured: "Error getting books, check your network or try again later."});
+    }
+    else {
+      return this.setState({errorOccured: false});
+    }
+  }
 
   render() {
     return (
@@ -32,14 +44,23 @@ class App extends Component {
           <h1 className="title">Book Finder</h1>
           <SearchBar
             setBookData={this.setBookData}
+            handleError={this.handleError}
+            hadError={this.state.errorOccured}
           />
       </header>
-       
         <section className="results-container">
-          {(this.state.bookData && this.state.bookData.length > 0) ? 
-            this.showBooks()
+          {this.state.errorOccured ? 
+            <p>
+              {/* Display error message */}
+              {this.state.errorOccured}
+            </p>
             :
-            <p className="no-books-found">No books were found.</p>
+            (
+              (this.state.bookData && this.state.bookData.length > 0) ? 
+              this.showBooks()
+              :
+              <p>Find books by using the search bar above.</p>
+            )
           }
           {console.log(this.state.bookData)}
         </section>

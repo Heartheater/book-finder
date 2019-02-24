@@ -11,32 +11,57 @@ export default class SearchBar extends Component {
    async searchBookAPI(searchTerm) {
         //google books api url
         const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-        let foundBooks = {};
-        console.log("searching for ", searchTerm);
+        let foundBooks = [];
+        let success = false;
+        if(!searchTerm || searchTerm == "" || searchTerm == " ") return;
+
         //call google books api 
         await fetch(`${API_URL}?q=${searchTerm}&key=${API_KEY}`)
             .then(response => {
-                if(!(response.status === 200)) console.error("Error getting book data from api");
+                if(!(response.status === 200)) {
+                    console.error("Error getting book data from api");
+                }
                 console.log(response);
                 return response.json();
             }) 
             //get JSON data and put it into foundBooks
             .then((json) => {
                 foundBooks = json.items;
+                success = true;
                 return foundBooks;
+            })
+            .catch((error) => {
+                success = false;
+                return console.error(error);
             });
-        return foundBooks;
+
+        if(success)
+            return foundBooks;
+        else 
+            return -1;
     }
 
     deleteQuery = () => {
+        document.querySelector('.search-input').value = "";
         this.setState({query: ''});
     }
     
     getBookData = async () => {
         const bookData = await this.searchBookAPI(this.state.query);
+
+        if(bookData === -1){
+            return this.props.handleError(true);
+        }
+        else if(!bookData || bookData === []){
+            return this.props.handleError(true,"No books were found.");
+        }
+        else if(this.props.hadError) {
+            //if the search previously returned an error, reset it now
+            this.props.handleError(false);
+        }
         console.log(bookData);
         //set state to hold the matching books data
-        this.props.setBookData(bookData);
+        return this.props.setBookData(bookData);
     }
 
     render() {
@@ -54,22 +79,24 @@ export default class SearchBar extends Component {
                 >
                 </input>
                 <button 
-                    className="delete-search"
+                    className="delete-search-btn"
                     onClick={this.deleteQuery}
                 >
                 x
                 </button>
                 </div>
                 <button 
-                    className="submit-search" 
+                    className="submit-search-btn" 
                     type="submit"
                     onClick={(e) => {
                         e.preventDefault();
+                        //return if there is no search query
+                        if(!this.state.query) return;
                         this.getBookData();
                         this.deleteQuery();
                     }}
                 >
-                submit
+                Search
                 </button>
             </div>
         );
