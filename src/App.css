@@ -17,6 +17,11 @@ button:hover {
 #app-header {
     width: 100%;
     text-align: center;
+    padding-bottom: 10px;
+    background-color: white;
+    position: sticky;
+    z-index: 2;
+    top: 0;
 }
 
 /****************** Search Bar *******************/
@@ -57,7 +62,6 @@ button:hover {
 /****************** Book Result container *******************/
 
 .results-container {
-    margin-top:10px;
     position: relative;
     min-height: 80vh;
     font-size: 18px;
@@ -79,12 +83,11 @@ button:hover {
     display: grid;
     padding-right:15px;
     border-right: #dfdbdb solid 1px;
+    background-color: white;
     border-top-left-radius: 7px;
     grid-template-areas: "cover title" "cover misc" "cover desc" "cover btn";
 }
-.book:hover {
-    background-image: linear-gradient(to right,#f9f7f7, rgb(255, 255, 255));
-}
+
 .book p {
     margin: 0;
 }
@@ -124,6 +127,7 @@ button:hover {
     flex-wrap: wrap;
     min-width: 327px;
     max-width: 100%;
+    padding: 10px 0;
 }
 
 .book-info-btn {
@@ -168,5 +172,8 @@ button:hover {
     }
     .results-container {
         justify-content: center;
+    }
+    .book-info-btn {
+        margin-top:16px;
     }
 }
