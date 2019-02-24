@@ -22,7 +22,6 @@ class App extends Component {
   }
 
   setBookData = (json) => {
-    console.log(json);
     return this.setState({bookData: json});
   }
   handleError = (errorOccured, details) => {
@@ -49,6 +48,7 @@ class App extends Component {
           />
       </header>
         <section className="results-container">
+
           {this.state.errorOccured ? 
             <p>
               {/* Display error message */}
@@ -62,7 +62,7 @@ class App extends Component {
               <p>Find books by using the search bar above.</p>
             )
           }
-          {console.log(this.state.bookData)}
+          
         </section>
       </main>
     );

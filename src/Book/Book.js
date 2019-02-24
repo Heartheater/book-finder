@@ -1,7 +1,7 @@
 import React from 'react';
-function truncateString(string, maxLength) {
+function truncateString(string,maxLength) {
     let truncated = string.split(" ").slice(0, maxLength).join(" ");
-    return truncated;
+    return truncated + ".";
 }
 export default function Book({data}) {
     return(
@@ -34,7 +34,7 @@ export default function Book({data}) {
                 {(data.searchInfo && data.searchInfo.textSnippet) ? 
                     truncateString(data.searchInfo.textSnippet, 270)
                     :
-                    "No description available"
+                    "No description available."
                 }
             </p>
             <a href={data.volumeInfo.infoLink} className="book-info-btn">

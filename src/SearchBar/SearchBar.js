@@ -13,28 +13,31 @@ export default class SearchBar extends Component {
         const API_URL = `https://www.googleapis.com/books/v1/volumes`;
         let foundBooks = [];
         let success = false;
-        if(!searchTerm || searchTerm == "" || searchTerm == " ") return;
-
+        //if user entered an empty string or query doesn't exist
+        if(!searchTerm || searchTerm == "" || searchTerm == " ") {
+            return -2;
+        }
         //call google books api 
         await fetch(`${API_URL}?q=${searchTerm}&key=${API_KEY}`)
             .then(response => {
                 if(!(response.status === 200)) {
+                    success = false;
                     console.error("Error getting book data from api");
                 }
-                console.log(response);
+                else {
+                    success = true;
+                }
                 return response.json();
             }) 
             //get JSON data and put it into foundBooks
             .then((json) => {
                 foundBooks = json.items;
-                success = true;
                 return foundBooks;
             })
             .catch((error) => {
                 success = false;
                 return console.error(error);
             });
-
         if(success)
             return foundBooks;
         else 
@@ -48,9 +51,12 @@ export default class SearchBar extends Component {
     
     getBookData = async () => {
         const bookData = await this.searchBookAPI(this.state.query);
-
+        //handle errors or empty data array
         if(bookData === -1){
             return this.props.handleError(true);
+        }
+        else if(bookData === -2){
+            return this.props.handleError(true,"Please enter a search query.");
         }
         else if(!bookData || bookData === []){
             return this.props.handleError(true,"No books were found.");
@@ -59,7 +65,6 @@ export default class SearchBar extends Component {
             //if the search previously returned an error, reset it now
             this.props.handleError(false);
         }
-        console.log(bookData);
         //set state to hold the matching books data
         return this.props.setBookData(bookData);
     }
