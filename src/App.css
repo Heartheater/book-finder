@@ -90,7 +90,8 @@ button:hover {
     margin: 20px 7px;
     min-width: 475px;
     width: 34vw;
-    height: 270px;
+    min-height: 270px;
+    max-height: 300px;
     overflow: hidden;
     display: grid;
     padding-right:15px;
@@ -180,18 +181,19 @@ button:hover {
     .book {
         min-width: 278px;
         width: 90vw;
-        height: 262px;
+        max-height: 400px;
+        grid-template-areas: "cover title" "cover misc" "cover btn" "desc desc";
     }
     .book-snippet {
         font-size: 16px;
         min-width: 157px;
-        max-height: 240px;
-        width: 80%;
+        min-height: 100px;
+        padding: 0 7px;
     }
     .results-container {
         justify-content: center;
     }
     .book-info-btn {
-        margin-top:16px;
+        margin:10px 0;
     }
 }
