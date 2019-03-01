@@ -76,6 +76,7 @@ export default class SearchBar extends Component {
                 <input 
                     className="search-input" 
                     type="text"
+                    placeholder="enter a search term..."
                     onChange={(e) => {
                         e.preventDefault();
                         const inputVal = e.target.value.toString().toLowerCase();

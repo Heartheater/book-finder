@@ -59,7 +59,7 @@ class App extends Component {
               (this.state.bookData && this.state.bookData.length > 0) ? 
               this.showBooks()
               :
-              <p>Find books by using the search bar above.</p>
+              <p>Nothing here yet.</p>
             )
           }
           

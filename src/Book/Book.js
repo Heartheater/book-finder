@@ -1,4 +1,18 @@
 import React from 'react';
+
+function getBookDesc(string) {
+    let desc = string;
+    let maxStrLength = 28;
+    //for some reason there's a lot of things like "&#39;" appearing in the book desc. 
+    //This replaces them
+    desc = desc.replace(/&#39;/g,"'");
+    desc = desc.replace(/&quot;/g,'"');
+
+    desc = truncateString(desc, maxStrLength);
+
+    return desc + "...";
+}
+
 function truncateString(string,maxLength) {
     let truncated = string.split(" ").slice(0, maxLength).join(" ");
     return truncated;
@@ -25,14 +39,19 @@ export default function Book({data}) {
                     }
                 </p>
                 <p className="publisher">
-                    Published by {data.volumeInfo.publisher}
+                    Publisher: {data.volumeInfo.publisher ? data.volumeInfo.publisher : "Unknown"}
                 </p>
-                <p className="page-count">{data.volumeInfo.pageCount} Pages</p>
+                {data.volumeInfo.pageCount ? 
+                    <p className="page-count">{data.volumeInfo.pageCount} Pages</p>
+                    : 
+                    null
+                }
+
             </div>
 
             <p className="book-snippet">
                 {(data.searchInfo && data.searchInfo.textSnippet) ? 
-                    truncateString(data.searchInfo.textSnippet, 100)
+                    getBookDesc(data.searchInfo.textSnippet)
                     :
                     "No description available."
                 }
