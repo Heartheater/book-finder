@@ -82,6 +82,15 @@ export default class SearchBar extends Component {
                         const inputVal = e.target.value.toString().toLowerCase();
                         this.setState({query: inputVal});
                     }}
+                    onKeyDown={(e) => {
+                        //listen for the enter key and submit search when pressed
+                        if (e.key === "Enter"){
+                            //return if there is no search query
+                            if(!this.state.query) return;
+                            this.getBookData();
+                            this.deleteQuery();
+                        }
+                    }}
                 >
                 </input>
                 <button 
