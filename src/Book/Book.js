@@ -3,20 +3,16 @@ import React from 'react';
 function getBookDesc(string) {
     let desc = string;
     let maxStrLength = 28;
-    //for some reason there's a lot of things like "&#39;" appearing in the book desc. 
-    //This replaces them
-    desc = desc.replace(/&#39;/g,"'");
-    desc = desc.replace(/&quot;/g,'"');
 
-    desc = truncateString(desc, maxStrLength);
-
-    return desc + "...";
+    desc = (truncateString(desc, maxStrLength) + "...");
+    return desc;
 }
 
 function truncateString(string,maxLength) {
     let truncated = string.split(" ").slice(0, maxLength).join(" ");
     return truncated;
 }
+
 export default function Book({data}) {
     return(
         <div className="book">
@@ -50,8 +46,8 @@ export default function Book({data}) {
             </div>
 
             <p className="book-snippet">
-                {(data.searchInfo && data.searchInfo.textSnippet) ? 
-                    getBookDesc(data.searchInfo.textSnippet)
+                {(data.volumeInfo && data.volumeInfo.description) ? 
+                    getBookDesc(data.volumeInfo.description)
                     :
                     "No description available."
                 }
