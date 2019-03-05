@@ -43,7 +43,7 @@ button:hover {
 }
 .search-input {
     height: 100%;
-
+    padding-left: 10px;
     width: 350px;
     font-size: 18px;
     border:none;
@@ -99,13 +99,15 @@ button:hover {
     background-color: white;
     border-top-left-radius: 7px;
     grid-template-areas: "cover title" "cover misc" "cover desc" "cover btn";
+    transition: 0.3s;
+
 }
 
 .book:hover {
-    transition: 0.3s;
     box-shadow: 10px 10px rgba(166,140,140,0.2);
     transform: translateY(-10px);
 }
+
 
 .book p {
     margin: 0;
